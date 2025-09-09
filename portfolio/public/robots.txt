@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://max-ship.github.io/sitemap.xml
