@@ -1,0 +1,521 @@
+:root {
+    --electric-blue: #4A90E2;
+    --light-gray-hover-focus: #f0f0f0;
+    --border-gray: #ddd;
+    --dark-gray-border-top: #666;
+    --text-dark-custom-select: #333;
+    --option-bg-focus: #C8FFD8;
+    --option-hover-bg: #f5f5f5;
+}
+
+.fieldApi {
+    justify-content: flex-start;
+    gap: 20px;
+    max-width: 720px;
+    height: 420px;
+    border-radius: 5px;
+    background-color: seashell;
+}
+
+.wrapUI {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 30px;
+    padding: 20px;
+    width: 270px;
+    height: 100%;
+}
+
+.wrapInput {
+    display: inline-block;
+    font-weight: 500;
+    color: gray;
+}
+
+.wrapInput::after {
+    content: " Введите город 🌆";
+    display: inline-block;
+    font-size: 16px;
+    transform: translateX(10px) translateY(-36px) scale(1);
+    transition: transform 0.4s ease;
+}
+
+.inputCity {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid grey;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.inputCity:-webkit-autofill {
+    box-shadow: 0 0 0 50px seashell inset;
+}
+
+.inputCity:focus,
+.inputCity:-webkit-autofill:focus {
+    border-bottom-color: var(--electric-blue);
+    box-shadow: 0 3px 3px 0 var(--electric-blue), 0 0 0 50px seashell inset;
+}
+
+.wrapInput:has(.inputCity:focus)::after,
+.wrapInput:has(.inputCity:not(:placeholder-shown))::after {
+    transform: translateX(-19px) translateY(-59px) scale(0.64);
+}
+
+.selectLabeltext {
+    font-size: 14px;
+    color: black;
+}
+
+.bodySelect {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    border-radius: 30% / 30%;
+    z-index: 3;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+    .bodySelect:not(:has(.options:hover)):hover {
+        background-color: var(--light-gray-hover-focus);
+    }
+}
+
+.selected {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.selected,
+.option {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    outline: none;
+    border: 1px solid var(--border-gray);
+    border-radius: 30% / 30%;
+    font-weight: 500;
+    color: var(--text-dark-custom-select);
+    background-color: transparent;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    transition: all 0.25s ease;
+}
+
+.selected::after {
+    content: "";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--dark-gray-border-top);
+    transform: translateY(-50%);
+    transition: all 0.4s ease;
+}
+
+.bodySelect.active .selected::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 2px;
+    width: 100%;
+    max-height: 0;
+    border: none;
+    background-color: seashell;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+}
+
+.bodySelect .options {
+    transform-style: preserve-3d;
+    perspective: 250px;
+}
+
+.selected:focus {
+    background-color: var(--light-gray-hover-focus);
+    box-shadow: 0 0 4px 4px seashell;
+}
+
+.option:focus {
+    background-color: green !important;
+    box-shadow: 0 0 0 2px seashell;
+}
+
+.bodySelect.active .options {
+    max-height: 300px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.bodySelect.active .options .option {
+    margin-bottom: 2.5px;
+    background-color: var(--option-bg-focus);
+    opacity: 0;
+    visibility: hidden;
+    transform: scaleY(0);
+    animation: fadeInDown 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    animation-delay: calc(var(--i) * 0.2s);
+}
+
+.bodySelect.close .options {
+    max-height: 300px;
+    opacity: 1;
+    transform-origin: top;
+    animation: fadeInUpOptions 0.25s forwards;
+    animation-delay: calc(var(--i) * 0.15s);
+}
+
+@keyframes fadeInUpOptions {
+    from {
+        transform: scaleY(1);
+    }
+
+    to {
+        transform: scaleY(0);
+        visibility: hidden;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: scaleY(0) scaleX(1) scaleZ(0) translateZ(-100px) translateY(-70px);
+    }
+
+    to {
+        transform: scaleY(1) scaleX(1) scaleZ(1) translateZ(0) translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .option:hover {
+        background-color: var(--option-hover-bg) !important;
+    }
+}
+
+.buttonGD {
+    --clr1: var(--option-bg-focus);
+    --clr2: #A0E5FF;
+    --clr3: #FFD8C8;
+    --clr4: #E8D8FF;
+    --clrBtn: #222;
+    position: relative;
+    align-self: flex-end;
+    margin-top: auto;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--clrBtn);
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.buttonGD::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background: linear-gradient(45deg, var(--clr1), var(--clr2), var(--clr3), var(--clr4));
+    background-size: 400%;
+    filter: blur(12px);
+    opacity: 0.5;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    animation: gradientBorder 6s infinite alternate;
+}
+
+.buttonGD:focus {
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 0 0 4px rgba(168, 213, 255, 0.4),
+        0 0 12px 8px rgba(200, 255, 216, 0.3);
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+.buttonGD:focus::before {
+    opacity: 0.8;
+    background: linear-gradient(45deg, var(--clr1), var(--clr2), var(--clr3), var(--clr4));
+    background-size: 200%;
+    filter: blur(8px);
+    animation: gradientBorder 3s infinite alternate;
+}
+
+@media screen and (min-width: 1024px) {
+    .buttonGD:hover::before {
+        opacity: 0.8;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .buttonGD:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+    }
+}
+
+.buttonGD:active {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+}
+
+@keyframes gradientBorder {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.dataWeather {
+    position: relative;
+    flex-grow: 1;
+    padding: 0 10px 20px 20px;
+    height: calc(100% - 40px);
+    color: black;
+    overflow-y: auto;
+}
+
+.dataWeather::-webkit-scrollbar {
+    width: 10px;
+}
+
+.dataWeather::-webkit-scrollbar-track {
+    margin: 3px 0;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.dataWeather::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: transparent;
+    box-shadow:
+        inset 0 0 7px rgba(126, 200, 227, 0.9),
+        0 0 7px rgba(126, 200, 227, 0.8);
+    transition: background-color 0.3s ease;
+}
+
+@media screen and (min-width: 1024px) {
+    .dataWeather::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(126, 200, 227, 0.9);
+    }
+}
+
+.commonBlock,
+.currentWeather,
+.weatherDaysBlock {
+    width: 100%;
+}
+
+.currentWeather:not(:last-child),
+.weatherDayItem:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+.currentWeatherTitle,
+.weatherDaysTitle {
+    margin-bottom: 16px;
+    font-size: 19px;
+}
+
+.weatherDayDate {
+    font-size: 18px;
+}
+
+.currentWeatherList,
+.weatherDayItem,
+.weatherDayParams {
+    list-style: none;
+}
+
+.noDataWeather,
+.noInternet,
+.noCity {
+    font-size: 18px;
+    color: darkred;
+}
+
+.loaderWrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 3;
+}
+
+.loader {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    perspective: 800px;
+}
+
+.inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.inner.one {
+    left: 0%;
+    top: 0%;
+    border-bottom: 5px solid darkred;
+    animation: rotate-one 1s linear infinite;
+}
+
+.inner.two {
+    right: 0%;
+    top: 0%;
+    border-right: 5px solid darkgreen;
+    animation: rotate-two 1s linear infinite;
+}
+
+.inner.three {
+    right: 0%;
+    bottom: 0%;
+    border-top: 5px solid darkblue;
+    animation: rotate-three 1s linear infinite;
+}
+
+@keyframes rotate-one {
+    0% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-two {
+    0% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-three {
+    0% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
+}
+
+@media (max-width: 992px) {
+    .inputCity {
+        font-size: 15px;
+    }
+
+    .buttonGD {
+        font-size: 16px;
+    }
+
+    .currentWeatherTitle,
+    .weatherDaysTitle {
+        font-size: 18px;
+    }
+
+    .weatherDayDate {
+        font-size: 16px;
+    }
+
+    .dataWeather,
+    .noDataWeather,
+    .noInternet,
+    .noCity {
+        font-size: 16px;
+
+    }
+}
+
+@media (max-width: 576px) {
+
+    .fieldApi {
+        flex-direction: column;
+        gap: 1px;
+        height: auto;
+    }
+
+    .wrapUI,
+    .dataWeather {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .wrapUI {
+        padding-top: 25px;
+        gap: 20px;
+        height: 270px;
+    }
+
+    .dataWeather {
+        position: relative;
+        top: -40px;
+        height: auto;
+        min-height: 300px;
+    }
+
+    .buttonGD {
+        top: -60px;
+    }
+
+    .currentWeatherTitle,
+    .weatherDaysTitle {
+        font-size: 17px;
+    }
+
+    .weatherDayDate {
+        font-size: 14px;
+    }
+
+    .dataWeather,
+    .noDataWeather,
+    .noInternet,
+    .noCity {
+        font-size: 14px;
+
+    }
+}

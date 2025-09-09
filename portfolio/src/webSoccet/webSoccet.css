@@ -1,0 +1,121 @@
+.fieldWebSocket {
+    width: 100%;
+    color: black;
+}
+
+.commonWrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 500px;
+    max-height: 450px;
+    height: 450px !important;
+}
+
+.radioWrap {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 13px;
+    color: white;
+    z-index: 2;
+}
+
+.radioWrap label {
+    display: inline-block;
+    padding: 0 3px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.radioWrap label:focus-within {
+    background-color: rgba(0, 123, 255, 0.3);
+    box-shadow: 0 0 2px 2px rgba(0, 123, 255, 0.8);
+}
+
+.output {
+    flex-grow: 1;
+    padding: 10px;
+    padding-top: 35px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: black;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.output::-webkit-scrollbar {
+    display: none;
+}
+
+.statusWS {
+    position: absolute;
+    top: 50px;
+    left: 15px;
+    font-weight: bold;
+    color: #555;
+}
+
+.msg {
+    margin-bottom: 10px !important;
+    font-size: 17px;
+    line-height: 1.595;
+}
+
+.pauseBtn {
+    position: absolute;
+    top: 45px;
+    right: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    background-color: yellow;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.pauseBtn:focus {
+    outline: 2px solid darkorange;
+}
+
+@media screen and (min-width: 1023.98px) {
+    .pauseBtn:hover {
+        background-color: wheat;
+    }
+}
+
+@media (max-width: 992px) {
+    .commonWrap {
+        max-height: 390px;
+        height: 390px !important;
+    }
+
+    .msg {
+        font-size: 15px;
+        line-height: 1.3;
+    }
+}
+
+@media (max-width: 576px) {
+    .commonWrap {
+        max-height: 415px;
+        height: 415px !important;
+    }
+
+    .statusWS,
+    .pauseBtn {
+        font-size: 15px;
+    }
+
+    .msg {
+        font-size: 13px;
+        line-height: 1.1;
+    }
+}

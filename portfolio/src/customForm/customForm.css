@@ -1,0 +1,73 @@
+:root {
+    --button-background-color-focus: #c19b00;
+    --button-background-color-hover: #daa520;
+}
+
+.fieldCustomForm {
+    position: relative;
+    width: 60%;
+    height: 600px;
+    border: none;
+    background-color: aliceblue;
+}
+
+.btnAddForm {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 22px;
+    background-color: goldenrod;
+    transform-origin: right center;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.btnAddForm:focus {
+    background-color: var(--button-background-color-focus);
+    box-shadow: 0 0 3px 7px rgba(218, 165, 32, 0.5);
+
+}
+
+@media screen and (min-width: 1024px) {
+    .btnAddForm:hover {
+        background-color: var(--button-background-color-hover);
+        box-shadow: 0 0 7px 3px rgba(222, 175, 47, 0.8);
+        transform: scale(1.05);
+    }
+}
+
+.add-anim {
+    animation: del 0.4s linear forwards reverse;
+}
+
+.del-anim {
+    animation: del 0.4s linear forwards;
+}
+
+
+@keyframes del {
+    from {
+        transform: scaleX(1);
+    }
+
+    to {
+        transform: scaleX(0);
+    }
+}
+
+@media (max-width: 992px) {
+    .fieldCustomForm {
+        padding: 10px;
+        width: 100%;
+        height: 500px;
+    }
+
+    .btnAddForm {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .fieldCustomForm {
+        height: 400px;
+    }
+}
